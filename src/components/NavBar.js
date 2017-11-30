@@ -5,10 +5,13 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 
+import classNames from 'classnames';
+
 import Scroll from 'react-scroll'; // Imports all Mixins
 const Events     = Scroll.Events;
 const scroll     = Scroll.animateScroll;
 const scrollSpy  = Scroll.scrollSpy;
+
 
 const styles = theme => ({
   root: {
@@ -17,6 +20,14 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  navBar: {
+    position: 'fixed',
+    transition: 'background-color 0.4s ease-out',
+    backgroundColor: 'red',
+  },
+  scrollActive: {
+    backgroundColor: 'blue',
   },
   button: {
     flex: 1,
@@ -28,8 +39,9 @@ class NavBar extends Component {
     super(props);
     this.classes = props.classes;
 
-    this.handleScroll = this.handleScroll.bind(this);
-    this.onContactClick = this.onContactClick.bind(this);
+    this.state = {
+      scrollActive: false,
+    };
   }
 
   componentDidMount() {
@@ -42,31 +54,62 @@ class NavBar extends Component {
     });
 
     scrollSpy.update();
+
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
     Events.scrollEvent.remove('begin');
     Events.scrollEvent.remove('end');
+
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll(e) {
-    console.log('scrolling...', e);
+  handleScroll = (e) => {
+    if (window.scrollY > 10 && !this.state.scrollActive) {
+      this.setState({
+        scrollActive: true,
+      });
+    } else if (window.scrollY < 10 && this.state.scrollActive) {
+      this.setState({
+        scrollActive: false,
+      })
+    }
   }
 
-  onContactClick() {
+  onAboutClick = (e) => {
+    scroll.scrollToTop();
+  }
+
+  onContactClick = (e) => {
     console.log('contact');
     scroll.scrollToBottom();
   }
 
   render() {
+    const navBarClasses = classNames({
+      [this.classes.navBar]: true,
+      [this.classes.scrollActive]: this.state.scrollActive,
+    });
+
     return (
       <div className={this.classes.root}>
-        <AppBar position="static">
+        <AppBar className={navBarClasses}>
           <Toolbar className={this.classes.toolbar}>
-            <Button color="contrast" className={this.classes.button}>About</Button>
-            <Button color="contrast" className={this.classes.button}>Portfolio</Button>
-            <Button color="contrast" className={this.classes.button}>Resume</Button>
-            <Button color="contrast" className={this.classes.button} onClick={this.onContactClick}>Contact</Button>
+            <Button
+              color="contrast"
+              className={this.classes.button}
+              onClick={this.onAboutClick}>About</Button>
+            <Button
+              color="contrast"
+              className={this.classes.button}>Portfolio</Button>
+            <Button
+              color="contrast"
+              className={this.classes.button}>Resume</Button>
+            <Button
+              color="contrast"
+              className={this.classes.button}
+              onClick={this.onContactClick}>Contact</Button>
           </Toolbar>
         </AppBar>
       </div>

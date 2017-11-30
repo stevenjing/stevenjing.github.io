@@ -8,8 +8,9 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
-        minHeight: '500px',
+        minHeight: '800px',
         height: 'calc(100vh + 80px)',
+        marginTop: '64px',
     },
     headline: {
         flex: 1,

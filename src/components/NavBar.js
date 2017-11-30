@@ -1,44 +1,77 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
+
+import Scroll from 'react-scroll'; // Imports all Mixins
+const Events     = Scroll.Events;
+const scroll     = Scroll.animateScroll;
+const scrollSpy  = Scroll.scrollSpy;
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 3,
     width: '100%',
   },
-  flex: {
-    flex: 1,
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'center',
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+  button: {
+    flex: 1,
   },
 });
 
-function NavBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography type="title" color="inherit" className={classes.flex}>
-            Title
-          </Typography>
-          <Button color="contrast">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.classes = props.classes;
+
+    this.handleScroll = this.handleScroll.bind(this);
+    this.onContactClick = this.onContactClick.bind(this);
+  }
+
+  componentDidMount() {
+    Events.scrollEvent.register('begin', function(to, element) {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function(to, element) {
+      console.log("end", arguments);
+    });
+
+    scrollSpy.update();
+  }
+
+  componentWillUnmount() {
+    Events.scrollEvent.remove('begin');
+    Events.scrollEvent.remove('end');
+  }
+
+  handleScroll(e) {
+    console.log('scrolling...', e);
+  }
+
+  onContactClick() {
+    console.log('contact');
+    scroll.scrollToBottom();
+  }
+
+  render() {
+    return (
+      <div className={this.classes.root}>
+        <AppBar position="static">
+          <Toolbar className={this.classes.toolbar}>
+            <Button color="contrast" className={this.classes.button}>About</Button>
+            <Button color="contrast" className={this.classes.button}>Portfolio</Button>
+            <Button color="contrast" className={this.classes.button}>Resume</Button>
+            <Button color="contrast" className={this.classes.button} onClick={this.onContactClick}>Contact</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 NavBar.propTypes = {

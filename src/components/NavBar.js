@@ -12,7 +12,6 @@ const Events     = Scroll.Events;
 const scroll     = Scroll.animateScroll;
 const scrollSpy  = Scroll.scrollSpy;
 
-
 const styles = theme => ({
   root: {
     width: '100%',
@@ -23,11 +22,12 @@ const styles = theme => ({
   },
   navBar: {
     position: 'fixed',
-    transition: 'background-color 0.4s ease-out',
-    backgroundColor: 'red',
+    boxShadow: 'none',
+    transition: 'background-color 0.1s ease-out',
+    backgroundColor: 'transparent',
   },
   scrollActive: {
-    backgroundColor: 'blue',
+    backgroundColor: '#5c4e3d',
   },
   button: {
     flex: 1,
@@ -66,11 +66,11 @@ class NavBar extends Component {
   }
 
   handleScroll = (e) => {
-    if (window.scrollY > 10 && !this.state.scrollActive) {
+    if (window.scrollY > 64 && !this.state.scrollActive) {
       this.setState({
         scrollActive: true,
       });
-    } else if (window.scrollY < 10 && this.state.scrollActive) {
+    } else if (window.scrollY < 64 && this.state.scrollActive) {
       this.setState({
         scrollActive: false,
       })
@@ -102,10 +102,10 @@ class NavBar extends Component {
               onClick={this.onAboutClick}>About</Button>
             <Button
               color="contrast"
-              className={this.classes.button}>Portfolio</Button>
+              className={this.classes.button}>Resume</Button>
             <Button
               color="contrast"
-              className={this.classes.button}>Resume</Button>
+              className={this.classes.button}>Portfolio</Button>
             <Button
               color="contrast"
               className={this.classes.button}

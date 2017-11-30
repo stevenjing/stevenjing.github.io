@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
+import landingPageImage from '../images/landingPageImage.jpg';
+
 const styles = theme => ({
     heroContainer: {
-        backgroundColor: 'blue',
+        backgroundImage: 'url(' + landingPageImage + ')',
+        backgroundSize: 'cover',
         display: 'flex',
         flexDirection: 'column',
         textAlign: 'center',
         minHeight: '800px',
-        height: 'calc(100vh + 80px)',
-        marginTop: '64px',
+        height: '100vh',
+        filter: 'grayscale(10%) sepia(47%)',
     },
     headline: {
         flex: 1,
@@ -29,8 +32,8 @@ class Hero extends Component {
     render() {
         return (
             <div className={this.classes.heroContainer}>
-                <h2 className={this.classes.headline}>About Me</h2>
-                <p className={this.classes.subHeadline}>Description about me</p>
+                {/* <h2 className={this.classes.headline}>About Me</h2>
+                <p className={this.classes.subHeadline}>Description about me</p> */}
             </div>
         );
     }

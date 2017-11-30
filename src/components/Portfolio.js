@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
-    profileContainer: {
-        minHeight: '2000px',
-        backgroundColor: 'yellow',
-    }
+    portfolioContainer: {
+        minHeight: '700px',
+        backgroundColor: '#37556a',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+    },
+
 });
 
 class Hero extends Component {
@@ -17,8 +20,37 @@ class Hero extends Component {
 
     render() {
         return (
-            <div className={this.classes.profileContainer}>
-                <h1>Portfolio</h1>
+            <div className={this.classes.portfolioContainer}>
+                {/* <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div>
+                <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div>
+                <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div>
+                <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div>
+                <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div>
+                <div className={this.classes.project}>
+                    <img src={} alt="oops..."/>
+                    <h2>Project Name</h2>
+                    <p>Project Description</p>
+                </div> */}
             </div>
         );
     }

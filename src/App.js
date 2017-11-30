@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 
 import NavBar from './components/NavBar';
+import Hero from './components/Hero';
+import Portfolio from './components/Portfolio';
 
 class App extends Component {
   render() {
     return (
-      <NavBar />
+      <div>
+        <NavBar />
+        <Hero />
+        <Portfolio />
+      </div>
     );
   }
 }

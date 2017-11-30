@@ -23,11 +23,11 @@ const styles = theme => ({
   navBar: {
     position: 'fixed',
     boxShadow: 'none',
-    transition: 'background-color 0.1s ease-out',
+    transition: 'background-color 0.3s ease-out',
     backgroundColor: 'transparent',
   },
   scrollActive: {
-    backgroundColor: '#5c4e3d',
+    backgroundColor: '#5c4f3c',
   },
   button: {
     flex: 1,

@@ -12,7 +12,7 @@ const styles = theme => ({
         flexDirection: 'column',
         textAlign: 'center',
         minHeight: '800px',
-        height: '100vh',
+        height: 'calc(100vh + 40px)',
         filter: 'grayscale(10%) sepia(47%)',
     },
     headline: {

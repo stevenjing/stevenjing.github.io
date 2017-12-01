@@ -17,9 +17,20 @@ const styles = theme => ({
     },
     headline: {
         flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        fontFamily: '"Lobster", cursive',
+        fontSize: '4.1em',
+        letterSpace: '1px',
+        textShadow: '3px 5px #5c4f3c',
+        color: 'white',
     },
     subHeadline: {
         flex: 1,
+        fontSize: '24px',
+        lineHeight: '30px',
+        color: 'white',
     },
 });
 
@@ -32,8 +43,12 @@ class Hero extends Component {
     render() {
         return (
             <div className={this.classes.heroContainer}>
-                {/* <h2 className={this.classes.headline}>About Me</h2>
-                <p className={this.classes.subHeadline}>Description about me</p> */}
+                <div className={this.classes.headline}>
+                    <h1>Hi, I'm Steven.</h1>
+                </div>
+                <div className={this.classes.subHeadline}>
+                    <p>I'm a <b>software engineer</b> and <b>web developer</b>.</p>
+                </div>
             </div>
         );
     }

@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
-
 import classNames from 'classnames';
 
 import Scroll from 'react-scroll'; // Imports all Mixins
@@ -23,14 +22,23 @@ const styles = theme => ({
   navBar: {
     position: 'fixed',
     boxShadow: 'none',
-    transition: 'background-color 0.3s ease-out',
+    transition: 'background-color 0.2s ease-out, top 0.2s ease-in-out',
     backgroundColor: 'transparent',
   },
-  scrollActive: {
+  navColor: {
     backgroundColor: '#5c4f3c',
+  },
+  scrollUp: {
+    top: '-64px',
   },
   button: {
     flex: 1,
+    fontFamily: '"Raleway", sans-serif',
+    fontSize: '14px',
+    fontWeight: '500',
+    letterSpacing: '3px',
+    textTransform: 'uppercase',
+    padding: '2px 3px',
   },
 });
 
@@ -40,7 +48,9 @@ class NavBar extends Component {
     this.classes = props.classes;
 
     this.state = {
-      scrollActive: false,
+      scrollY: 0,
+      navColor: false,
+      navHide: false,
     };
   }
 
@@ -66,13 +76,32 @@ class NavBar extends Component {
   }
 
   handleScroll = (e) => {
-    if (window.scrollY > 64 && !this.state.scrollActive) {
+    const scrollPosition = window.scrollY;
+
+
+    // show/hide navbar
+    if (scrollPosition > this.state.scrollY && !this.state.navHide) {
       this.setState({
-        scrollActive: true,
+        navHide: true,
+      })
+    } else if (scrollPosition < this.state.scrollY && this.state.navHide) {
+      this.setState({
+        navHide: false,
       });
-    } else if (window.scrollY < 64 && this.state.scrollActive) {
+    }
+
+    this.setState({
+      scrollY: scrollPosition,
+    });
+
+    // add/remove color
+    if (scrollPosition > 64 && !this.state.navColor) {
       this.setState({
-        scrollActive: false,
+        navColor: true,
+      });
+    } else if (scrollPosition < 64 && this.state.navColor) {
+      this.setState({
+        navColor: false,
       })
     }
   }
@@ -89,7 +118,8 @@ class NavBar extends Component {
   render() {
     const navBarClasses = classNames({
       [this.classes.navBar]: true,
-      [this.classes.scrollActive]: this.state.scrollActive,
+      [this.classes.navColor]: this.state.navColor,
+      [this.classes.scrollUp]: this.state.navHide,
     });
 
     return (

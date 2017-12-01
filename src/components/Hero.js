@@ -14,6 +14,7 @@ const styles = theme => ({
         minHeight: '800px',
         height: 'calc(100vh + 40px)',
         filter: 'grayscale(10%) sepia(47%)',
+        position: 'relative'
     },
     headline: {
         flex: 1,
@@ -23,15 +24,25 @@ const styles = theme => ({
         fontFamily: '"Lobster", cursive',
         fontSize: '4.1em',
         letterSpace: '1px',
-        textShadow: '3px 5px #5c4f3c',
+        textShadow: '2px 2px #5c4f3c',
         color: 'white',
+        zIndex: 2,
     },
     subHeadline: {
         flex: 1,
         fontSize: '24px',
         lineHeight: '30px',
         color: 'white',
+        zIndex: 2,
     },
+    imageFade:{
+        position:"absolute",
+        width:"100%",
+        height: "100%",
+        backgroundColor:"black",
+        opacity: 0.4,
+        zIndex: 1,
+    }
 });
 
 class Hero extends Component {
@@ -43,6 +54,7 @@ class Hero extends Component {
     render() {
         return (
             <div className={this.classes.heroContainer}>
+                <div className={this.classes.imageFade}/>
                 <div className={this.classes.headline}>
                     <h1>Hi, I'm Steven.</h1>
                 </div>
